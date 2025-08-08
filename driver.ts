@@ -267,11 +267,13 @@ namespace PCA9685 {
     export const chips: ChipConfig[] = []
 
     function calcFreqPrescaler(freq: number): number {
-        prescaleval = 25000000.0;    # 25MHz
-        prescaleval /= 4096.0;      # 12-bit
-        prescaleval /= float(freq);
-        prescaleval -= 1.0;
-        prescale = int(math.floor(prescaleval + 0.5));
+        let prescaleval = 25000000.0    // 25 MHz klok
+        prescaleval /= 4096.0           // 12-bit resolutie
+        prescaleval /= freq_hz          // gewenste frequentie
+        prescaleval -= 1.0
+
+        // Afronden naar dichtstbijzijnde integer
+        let prescale = Math.floor(prescaleval + 0.5)
         return prescale;
     }
 
