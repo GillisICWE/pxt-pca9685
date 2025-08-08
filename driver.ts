@@ -309,7 +309,9 @@ namespace PCA9685 {
     }
 
     function calcFreqOffset(freq: number, offset: number) {
-        return ((offset * 1000) / (1000 / freq) * chipResolution) / 10000
+        //let period = 1000000 / freq
+        //int(4095 * value / period)
+        return Math.round(((offset * 1000) / (1000 / freq) * chipResolution) / 10000)
     }
 
     /**
@@ -435,7 +437,7 @@ namespace PCA9685 {
      * @param midTimeCs The mid (90 degree for regular or off position if continuous rotation) for the servo; eg: 15
      */
     //% block advanced=true
-    export function setServoLimits(servoNum: ServoNum = 1, minTimeCs: number = 5, maxTimeCs: number = 2.5, midTimeCs: number = -1, chipAddress: number = 0x40): void {
+    export function setServoLimits(servoNum: ServoNum = 1, minTimeCs: number = 500, maxTimeCs: number = 2500, midTimeCs: number = -1, chipAddress: number = 0x40): void {
         const chip = getChipConfig(chipAddress)
         servoNum = Math.max(1, Math.min(16, servoNum))
         minTimeCs = Math.max(0, minTimeCs)
