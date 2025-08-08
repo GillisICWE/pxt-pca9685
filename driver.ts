@@ -269,7 +269,7 @@ namespace PCA9685 {
     function calcFreqPrescaler(freq: number): number {
         let prescaleval = 25000000.0    // 25 MHz klok
         prescaleval /= 4096.0           // 12-bit resolutie
-        prescaleval /= freq_hz          // gewenste frequentie
+        prescaleval /= freq         // gewenste frequentie
         prescaleval -= 1.0
 
         // Afronden naar dichtstbijzijnde integer
