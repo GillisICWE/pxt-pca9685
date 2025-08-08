@@ -267,7 +267,7 @@ namespace PCA9685 {
     export const chips: ChipConfig[] = []
 
     function calcFreqPrescaler(freq: number): number {
-        return (25000000 / (freq * chipResolution)) - 1;
+        return Math.round((25000000 / (freq * chipResolution)) - 1);
     }
 
     function stripHexPrefix(str: string): string {
